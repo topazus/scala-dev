@@ -6,7 +6,8 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"scalameta.metals"
+				"scalameta.metals",
+				"ms-azuretools.vscode-docker"
 			]
 		}
 	},
