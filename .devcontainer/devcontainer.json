@@ -1,0 +1,24 @@
+{
+	"name": "my scala dev",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"context": "..",
+	},
+	"runArgs": [
+		"--cap-add=SYS_PTRACE",
+		"--security-opt",
+		"seccomp=unconfined"
+	],
+	// Settings to be applied to Visual Studio Code.
+	"settings": {
+
+
+
+	},
+	// Visual Studio Code extensions (plugins) to be installed.
+	"extensions": [
+
+	],
+	// Command to be executed after the container is created.
+	"postCreateCommand": ""
+}
