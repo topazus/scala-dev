@@ -3,9 +3,7 @@ FROM fedora:36
 WORKDIR /home
 
 RUN dnf -y update && \
-  dnf -y install gcc gcc-g++ nano wget
-
+  sudo dnf groupinstall -y "Development Tools" "Development Libraries"
 
 RUN useradd -m -G wheel ruby
-# Change to non-root privilege
-USER ruby
+# after creating image, set user ruby, add su - ruby to /root/.bashrc
