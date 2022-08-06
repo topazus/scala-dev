@@ -49,8 +49,6 @@ install -Dpm 0644 dist/nimble/nimble.zsh-completion %{buildroot}%{_datadir}/zsh/
 %check
 
 %files
-%license copying.txt
-%doc readme.md
 /usr/bin/nim*
 /usr/bin/atlas
 %{_bindir}/testament

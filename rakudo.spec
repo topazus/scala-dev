@@ -2,7 +2,7 @@
 %define build_timestamp %{lua: print(os.date("%Y.%m.%d"))}
 %global appname rakudo
 
-%define is_git 0
+%define is_git 1
 
 Name:           %{appname}-git
 Version:        %{build_timestamp}
@@ -13,11 +13,9 @@ URL:            http://rakudo.org/
 #Source0:
 
 BuildRequires:  perl make gcc
+BuildRequires:  git curl tar wget
 
-BuildRequires:  git curl tar
-
-# To fix rpath issue with executables.
-BuildRequires:  chrpath
+Conflicts:      moarvm nqp rakudo
 
 %description
 Rakudo Perl 6, or just Rakudo, is an implementation of the
@@ -27,7 +25,6 @@ MoarVM virtual machine.
 
 
 %prep
-
 
 %if %{is_git}
 git clone --depth=1 https://github.com/rakudo/rakudo.git .
@@ -39,23 +36,17 @@ cp -r rakudo-*/* . && rm -r rakudo-*
 
 
 %build
-perl Configure.pl --gen-moar --gen-nqp --backends=moar
+perl Configure.pl --gen-moar --gen-nqp --prefix=/usr --backends=moar
 %{make_build}
 
 %install
 # solve rpath error
 export QA_RPATHS=$[ 0x0001 | 0x002 ]
-
+export RAKUDO_LOG_PRECOMP=1
+export RAKUDO_RERESOLVE_DEPENDENCIES=0
 #%{make_install} DESTDIR=%{_prefix}
 #%{make_install}
-
-cd install
-mkdir -p %{buildroot}%{_prefix}
-cp -a bin include lib share %{buildroot}%{_prefix}
-
-# Fix the rpath error.
-#chrpath --delete %{buildroot}%{_bindir}/moar
-
+make install
 
 %check
 

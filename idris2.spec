@@ -30,7 +30,7 @@ mkdir -p %{buildroot}%{_libdir}
 make install DESTDIR=%{buildroot} PREFIX=%{buildroot}%{_libdir}
 
 mkdir -p %{buildroot}%{_bindir}
-ln -s %{buildroot}%{_libdir}/bin/idris2 %{buildroot}%{_bindir}/idris2
+ln -s %{_bindir}/idris2 %{buildroot}%{_libdir}/bin/idris2
 
 #mv %{buildroot}%{_libdir}/bin/idris2 %{buildroot}%{_bindir}
 
@@ -41,8 +41,6 @@ ln -s %{buildroot}%{_libdir}/bin/idris2 %{buildroot}%{_bindir}/idris2
 %check
 
 %files
-%license LICENSE
-%doc README.md
 /usr/bin/idris2
 /usr/lib64/bin/idris2
 /usr/lib64/bin/idris2_app/idris2*

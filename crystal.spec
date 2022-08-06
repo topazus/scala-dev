@@ -66,8 +66,6 @@ install -pDm644 etc/completion.zsh %{buildroot}%{_datadir}/zsh/site-functions/*
 
 
 %files
-%license LICENSE*
-%doc README.md
 %{_bindir}/%{appname}
 %{_datadir}/man/man1/crystal.1.gz
 %{_datadir}/doc/crystal/*
