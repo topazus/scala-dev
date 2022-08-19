@@ -13,24 +13,24 @@
 %global build_number 213.6461.79
 %define build_timestamp %{lua: print(os.date("%Y.%m.%d"))}
 
-Name:           idea
+Name:           rubymine
 Version:        %{build_timestamp}
 Release:        1%{?dist}
-Summary:        An intelligent IDE for Java, Groovy and other programming languages
+Summary:        The Ruby on Rails IDE
 License:        custom
-URL:            https://www.jetbrains.com/idea/
-Source0:        https://download.jetbrains.com/idea/ideaIU-2022.2.tar.gz
-Source1:        https://raw.githubusercontent.com/topazus/fedora-copr/main/intellij-idea-ultimate/intellij-idea-ultimate.desktop
+URL:            https://www.jetbrains.com/ruby/
+Source0:        https://download.jetbrains.com/ruby/RubyMine-2022.2.tar.gz
+Source1:        https://raw.githubusercontent.com/topazus/fedora-copr/main/rubymine/rubymine.desktop
 
 BuildRequires:  pkg-config desktop-file-utils
 
 %description
-An intelligent IDE for Java, Groovy and other programming languages with advanced refactoring features intensely focused on developer productivity.
+The Ruby on Rails IDE
 
 %prep
 wget %{SOURCE1}
-tar xf ideaIU-*.tar.gz
-cd idea-IU-*/
+tar xf RubyMine-*.tar.gz
+cd RubyMine-*/
 
 # Replace python shebangs to make them compatible with fedora
 find -type f -name "*.py" -exec sed -e 's|/usr/bin/env python|%{__python3}|g' \
@@ -68,12 +68,12 @@ rm -rf jbr
 %build
 
 %install
-cd idea-IU-*/
+cd RubyMine-*/
 mkdir -p %{buildroot}/opt/%{name}
 cp -a * %{buildroot}/opt/%{name}
 
-install -pDm644 bin/idea.png %{buildroot}%{_datadir}/pixmaps/%{name}.png
-install -pDm644 bin/idea.svg %{buildroot}%{_datadir}/icons/hicolor/scalable/apps/%{name}.svg
+install -pDm644 bin/%{name}.png %{buildroot}%{_datadir}/pixmaps/%{name}.png
+install -pDm644 bin/%{name}.svg %{buildroot}%{_datadir}/icons/hicolor/scalable/apps/%{name}.svg
 
 install -pDm644 %{SOURCE1} %{buildroot}%{_datadir}/applications/%{name}.desktop
 
